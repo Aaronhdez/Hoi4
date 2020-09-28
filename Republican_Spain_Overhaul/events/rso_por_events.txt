@@ -1,0 +1,42 @@
+add_namespace = SCW_portugal
+
+#Spain wants to unite with us
+country_event = {
+	id = SCW_portugal.1
+	title = SCW_portugal.1.t
+	desc = SCW_portugal.1.d
+	picture = GFX_news_event_generic_read_write
+
+	is_triggered_only = yes
+	
+	option = { #YES
+		ai_chance = { 
+			factor = 50
+			modifier = {
+				has_opinion_modifier = in_faction
+				factor = 85
+			}
+		}
+		FROM = {
+			country_event = { id = SCW_spain.5 hours = 6} #NICE
+		}
+	}
+	
+	option = { #NO
+		name = SCW_portugal.1.b
+		ai_chance = { 
+			factor = 50 
+				modifier = {
+				has_opinion_modifier = in_faction
+				factor = 15
+			}
+		}
+		FROM = { 
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = small_decrease
+			}
+			country_event = { id = SCW_spain.6 hours = 6 } #FOOLS
+		}
+	}
+}

@@ -1,0 +1,11 @@
+SPR_SCW_equipment_licenses = {
+	icon = generic_political_actions
+
+	allowed = {
+		tag = SPR
+	}
+	
+	visible = {
+		has_completed_focus = SPR_equipamientofrancs
+	}
+}

@@ -1,0 +1,90 @@
+spriteTypes = { 
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_investigate_coup"
+        texturefile = "gfx/interface/ideas/SPR_disbanded_army.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_africanists_shot"
+        texturefile = "gfx/interface/ideas/idea_generic_fascism_banned.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_africanists_arrested_a"
+        texturefile = "gfx/interface/ideas/spr_anti_fascist_crusade.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_africanists_arrested_b"
+        texturefile = "gfx/interface/ideas/idea_generic_purge.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_social_reforms_1"
+        texturefile = "gfx/interface/ideas/spr_the_popular_front.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_social_reforms_2"
+        texturefile = "gfx/interface/ideas/idea_generic_neutrality_drift_bonus.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_social_reforms_3"
+        texturefile = "gfx/interface/ideas/idea_hun_treaty_of_trianon.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_labour_law_1"
+        texturefile = "gfx/interface/ideas/generic_production_bonus.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_labour_law_2"
+        texturefile = "gfx/interface/ideas/idea_generic_exploit_mines.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_labour_law_3"
+        texturefile = "gfx/interface/ideas/idea_generic_agrarian_reform.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_economic_recovery"
+        texturefile = "gfx/interface/ideas/generic_economic_increase.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_federalism"
+        texturefile = "gfx/interface/ideas/generic_victors_of_ww1.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_autonomous_communities"
+        texturefile = "gfx/interface/ideas/generic_pp_unity_bonus.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_full_secularism"
+        texturefile = "gfx/interface/ideas/FRA_matignon_agreements.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_SPR_SCW_middle_secularism"
+        texturefile = "gfx/interface/ideas/generic_volunteer_expedition_bonus.dds"
+    }
+	spriteType = {
+		name = "GFX_idea_SPR_SCW_negrinism"
+		texturefile = "gfx/interface/ideas/idea_spr_juan_negrin.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_SPR_SCW_caballerism"
+		texturefile = "gfx/interface/ideas/idea_spr_francisco_largo_caballero.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_SPR_SCW_defensive_stratagems"
+		texturefile = "gfx/interface/ideas/FRA_fortification_focus.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_SPR_SCW_mobile_war"
+		texturefile = "gfx/interface/ideas/FRA_motorized_focus.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_SPR_SCW_amnesty_again"
+		texturefile = "gfx/interface/ideas/soviet_german_friendship.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_POR_SCW_spanish_influence"
+		texturefile = "gfx/interface/ideas/generic_democratic_drift_bonus.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_SPR_SCW_secure_reserve"
+		texturefile = "gfx/interface/ideas/spr_seize_the_gold_reserves.dds"
+	}
+}

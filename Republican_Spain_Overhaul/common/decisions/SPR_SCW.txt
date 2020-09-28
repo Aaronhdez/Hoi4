@@ -1,0 +1,1211 @@
+SPR_SCW_equipment_licenses = {
+
+################################################################
+#########   LIGHT TANK 1   #####################################
+################################################################
+
+	SPR_SCW_fra_basic_light_tank = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 125
+
+		available = {
+			NOT = {
+				has_license = {
+					from = FRA
+					equipment = {
+						type = light_tank_equipment_1
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_lt_1 }
+			FRA = { has_tech = basic_light_tank }
+			country_exists = FRA 
+			SPR = { is_in_faction_with = FRA }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+		
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_lt_1
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			FRA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = light_tank_equipment_1 	
+					}
+					cost_factor = 0
+				}
+			}
+		}		
+	}
+	
+	SPR_SCW_eng_basic_light_tank = {
+		
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 125
+
+		available = {
+			NOT = {
+				has_license = {
+					from = ENG
+					equipment = {
+						type = light_tank_equipment_1
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_lt_1 }
+			ENG = { has_tech = basic_light_tank }
+			country_exists = ENG 
+			SPR = { is_in_faction_with = ENG }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_lt_1
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			ENG = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = light_tank_equipment_1 	
+						cost_factor = 0
+					}
+				}
+			}
+		}			
+	}
+	
+	SPR_SCW_usa_basic_light_tank = {
+		
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 125
+
+		available = {
+			NOT = {
+				has_license = {
+					from = USA
+					equipment = {
+						type = light_tank_equipment_1
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_lt_1 }
+			USA = { has_tech = basic_light_tank }
+			country_exists = USA 
+			SPR = { is_in_faction_with = USA }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_lt_1
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			USA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = light_tank_equipment_1 
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+
+################################################################
+#########   LIGHT TANK 2   #####################################
+################################################################
+
+	SPR_SCW_fra_light_tank_1 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 175
+
+		available = {
+			NOT = {
+				has_license = {
+					from = FRA
+					equipment = {
+						type = light_tank_equipment_2
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_lt_2 }
+			FRA = { has_tech = improved_light_tank }
+			country_exists = FRA 
+			SPR = { is_in_faction_with = FRA }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_lt_2
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			FRA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = light_tank_equipment_2 	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+	
+	SPR_SCW_eng_light_tank_1 = {
+		
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 175
+
+		available = {
+			NOT = {
+				has_license = {
+					from = ENG
+					equipment = {
+						type = light_tank_equipment_2
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_lt_2 }
+			ENG = { has_tech = improved_light_tank }
+			country_exists = ENG 
+			SPR = { is_in_faction_with = ENG }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_lt_2
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			ENG = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = light_tank_equipment_2 	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+	
+	SPR_SCW_usa_light_tank_1 = {
+		
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 175
+
+		available = {
+			NOT = {
+				has_license = {
+					from = USA
+					equipment = {
+						type = light_tank_equipment_2
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_lt_2 }
+			USA = { has_tech = improved_light_tank }
+			country_exists = USA 
+			SPR = { is_in_faction_with = USA }
+		}
+
+		days_remove = 15		
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_lt_2
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			USA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = light_tank_equipment_2 	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+
+################################################################
+#########   LIGHT TANK 3   #####################################
+################################################################
+
+	SPR_SCW_fra_light_tank_2 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 200
+
+		available = {
+			NOT = {
+				has_license = {
+					from = FRA
+					equipment = {
+						type = light_tank_equipment_3
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_lt_3 }
+			FRA = { has_tech = advanced_light_tank }
+			country_exists = FRA 
+			SPR = { is_in_faction_with = FRA }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_lt_3
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			FRA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = light_tank_equipment_3 	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+	
+	SPR_SCW_eng_light_tank_2 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 200
+
+		available = {
+			NOT = {
+				has_license = {
+					from = ENG
+					equipment = {
+						type = light_tank_equipment_3
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_lt_3 }
+			ENG = { has_tech = advanced_light_tank }
+			country_exists = ENG 
+			SPR = { is_in_faction_with = ENG }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_lt_3
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			ENG = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = light_tank_equipment_3 	
+					}
+					cost_factor = 0
+				}
+			}
+		}		
+	}
+	
+	SPR_SCW_usa_light_tank_2 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 200
+
+		available = {
+			NOT = {
+				has_license = {
+					from = USA
+					equipment = {
+						type = light_tank_equipment_3
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_lt_3 }
+			USA = { has_tech = advanced_light_tank }
+			country_exists = USA 
+			SPR = { is_in_faction_with = USA }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_lt_3
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			USA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = light_tank_equipment_3 	
+					}
+					cost_factor = 0
+				}
+			}
+		}		
+	}
+
+################################################################
+#########   HEAVY TANK 1   #####################################
+################################################################
+
+	SPR_SCW_fra_heavy_tank_1 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 175
+
+		available = {
+			NOT = {
+				has_license = {
+					from = FRA
+					equipment = {
+						type = heavy_tank_equipment_1
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_ht_1 }
+			FRA = { has_tech = basic_heavy_tank }
+			country_exists = FRA 
+			SPR = { is_in_faction_with = FRA }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_ht_1
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			FRA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = heavy_tank_equipment_1  	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+
+	SPR_SCW_eng_heavy_tank_1 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 175
+
+		available = {
+			NOT = {
+				has_license = {
+					from = ENG
+					equipment = {
+						type = heavy_tank_equipment_1
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_ht_1 }
+			ENG = { has_tech = basic_heavy_tank }
+			country_exists = ENG 
+			SPR = { is_in_faction_with = ENG }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_ht_1
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			ENG = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = heavy_tank_equipment_1  	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}	
+
+	SPR_SCW_usa_heavy_tank_1 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 175
+
+		available = {
+			NOT = {
+				has_license = {
+					from = USA
+					equipment = {
+						type = heavy_tank_equipment_1
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_ht_1 }
+			USA = { has_tech = basic_heavy_tank }
+			country_exists = USA 
+			SPR = { is_in_faction_with = USA }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_ht_1
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			USA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = heavy_tank_equipment_1  	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+	
+################################################################
+#########   HEAVY TANK 2   #####################################
+################################################################
+
+	SPR_SCW_fra_heavy_tank_2 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 225
+
+		available = {
+			NOT = {
+				has_license = {
+					from = FRA
+					equipment = {
+						type = heavy_tank_equipment_2
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_ht_2 }
+			FRA = { has_tech = improved_heavy_tank  }
+			country_exists = FRA 
+			SPR = { is_in_faction_with = FRA }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_ht_2
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			FRA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = heavy_tank_equipment_2  	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+
+	SPR_SCW_eng_heavy_tank_2 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 225
+
+		available = {
+			NOT = {
+				has_license = {
+					from = ENG
+					equipment = {
+						type = heavy_tank_equipment_2
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_ht_2 }
+			ENG = { has_tech = improved_heavy_tank  }
+			country_exists = ENG 
+			SPR = { is_in_faction_with = ENG }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_ht_2
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			ENG = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = heavy_tank_equipment_2  	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+	
+	SPR_SCW_usa_heavy_tank_2 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 225
+
+		available = {
+			NOT = {
+				has_license = {
+					from = USA
+					equipment = {
+						type = heavy_tank_equipment_2
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_ht_2 }
+			USA = { has_tech = improved_heavy_tank  }
+			country_exists = USA 
+			SPR = { is_in_faction_with = USA }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_ht_2
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			USA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = heavy_tank_equipment_2  	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+	
+################################################################
+#########   MEDIUM TANK 1   ####################################
+################################################################
+	
+	SPR_SCW_fra_medium_tank_1 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 200
+
+		available = {
+			NOT = {
+				has_license = {
+					from = FRA
+					equipment = {
+						type = medium_tank_equipment_1
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_mt_1 }
+			FRA = { has_tech = basic_medium_tank }
+			country_exists = FRA 
+			SPR = { is_in_faction_with = FRA }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_mt_1
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			FRA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = medium_tank_equipment_1  	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+	
+	SPR_SCW_eng_medium_tank_1 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 200
+
+		available = {
+			NOT = {
+				has_license = {
+					from = ENG
+					equipment = {
+						type = medium_tank_equipment_1
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_mt_1 }
+			ENG = { has_tech = basic_medium_tank }
+			country_exists = ENG 
+			SPR = { is_in_faction_with = ENG }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_mt_1
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			ENG = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = medium_tank_equipment_1  	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+	
+	SPR_SCW_usa_medium_tank_1 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 200
+
+		available = {
+			NOT = {
+				has_license = {
+					from = USA
+					equipment = {
+						type = medium_tank_equipment_1
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_mt_1 }
+			USA = { has_tech = basic_medium_tank }
+			country_exists = USA 
+			SPR = { is_in_faction_with = USA }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_mt_1
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			USA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = medium_tank_equipment_1  	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+	
+################################################################
+#########   MEDIUM TANK 2   ####################################
+################################################################
+	
+	SPR_SCW_fra_medium_tank_2 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 250
+
+		available = {
+			NOT = {
+				has_license = {
+					from = FRA
+					equipment = {
+						type = medium_tank_equipment_2
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_mt_2 }
+			FRA = { has_tech = improved_medium_tank }
+			country_exists = FRA 
+			SPR = { is_in_faction_with = FRA }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_mt_2
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			FRA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = medium_tank_equipment_2  	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+	
+	SPR_SCW_eng_medium_tank_2 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 250
+
+		available = {
+			NOT = {
+				has_license = {
+					from = ENG
+					equipment = {
+						type = medium_tank_equipment_2
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_mt_2 }
+			ENG = { has_tech = improved_medium_tank }
+			country_exists = ENG 
+			SPR = { is_in_faction_with = ENG }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_mt_2
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			ENG = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = medium_tank_equipment_2  	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+
+	SPR_SCW_usa_medium_tank_2 = {
+	
+		icon = generic_prepare_civil_war
+	
+		allowed = {
+			tag = SPR
+		}
+		
+		cost = 250
+
+		available = {
+			NOT = {
+				has_license = {
+					from = USA
+					equipment = {
+						type = medium_tank_equipment_2
+					}
+				}
+			}
+			NOT = { has_country_flag = SPR_SCW_negotiating_licenses }
+		}
+		
+		visible = {
+			tag = SPR
+			NOT = { has_country_flag = SPR_SCW_licensed_mt_2 }
+			USA = { has_tech = improved_medium_tank }
+			country_exists = USA 
+			SPR = { is_in_faction_with = USA }
+		}
+		
+		days_remove = 15
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = yes
+				
+		complete_effect {
+			set_country_flag = SPR_SCW_negotiating_licenses
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = SPR_SCW_licensed_mt_2
+				clr_country_flag = SPR_SCW_negotiating_licenses
+			}
+			USA = {
+				create_production_license = {
+					target = SPR 
+					equipment = {
+						type = medium_tank_equipment_2  	
+						cost_factor = 0
+					}
+				}
+			}
+		}		
+	}
+	
+	#Fighter
+	#Bomber
+	#CAS
+}
+

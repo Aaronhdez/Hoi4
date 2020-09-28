@@ -1,0 +1,117 @@
+add_namespace = SCW_spain
+
+#SPR JOINS ALLIES
+country_event = {
+	id = SCW_spain.1
+	title = SCW_spain.1.t
+	desc = SCW_spain.1.d
+	picture = GFX_report_event_por_president_military_inspection
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = SCW_spain.1.a		#NICE
+		hidden_effect = {
+			SPR = {
+				country_event = { days = 1 id = SCW_news.1 }
+			}
+			news_event = { id = SCW_public_news.1 }
+		}
+	}
+}
+
+#SPR DOES NOT JOIN ALLIES
+country_event = {
+	id = SCW_spain.2
+	title = SCW_spain.2.t
+	desc = SCW_spain.2.d
+	picture = GFX_report_event_por_return_of_the_monarchy
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = SCW_spain.2.a		#FOOLS
+	}
+}
+
+#ENGLAND ACCEPTS TO SURRENDER GIBRALTAR
+country_event = {
+	id = SCW_spain.3
+	title = SCW_spain.3.t
+	desc = SCW_spain.3.d
+	picture = GFX_report_event_por_return_of_the_monarchy
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = SCW_spain.1.a
+		SPR = { 
+			transfer_state = 118
+		}
+		hidden_effect = {
+			news_event = { id = SCW_public_news.2 }
+		}
+	}
+}
+
+#ENGLAND REFUSES TO SURRENDER GIBRALTAR
+country_event = {
+	id = SCW_spain.4
+	title = SCW_spain.4.t
+	desc = SCW_spain.4.d
+	picture = GFX_report_event_poland_rejects
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = SCW_spain.4.a
+	}
+}
+
+#Portugal joins Us
+country_event = {
+	id = SCW_spain.5
+	title = SCW_spain.5.t
+	desc = SCW_spain.5.d
+	picture = GFX_report_event_por_return_of_the_monarchy
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = SCW_spain.5.a
+		ai_chance = { factor = 100 }
+		SPR = {
+			annex_country = { target = POR transfer_troops = yes }
+			add_ideas = SPR_SCW_a_united_peninsula
+			if = {
+				limit = { 
+					has_completed_focus = SPR_adoptarelfederalismo
+				}
+				set_cosmetic_tag = SPR_SCW_iberia_federal
+			} else {
+				set_cosmetic_tag = SPR_SCW_iberia_centralist
+			}
+			add_political_power = 100
+			news_event = { id = SCW_public_news.4 } #Event ending
+		}
+		hidden_effect = {
+			FROM = {
+				custom_effect_tooltip = GAME_OVER_TT
+			}
+		}
+	}
+}
+
+#PORTUGAL Refuses to join
+country_event = {
+	id = SCW_spain.6
+	title = SCW_spain.6.t
+	desc = SCW_spain.6.d
+	picture = GFX_report_event_poland_rejects
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = SCW_spain.6.a
+	}
+}

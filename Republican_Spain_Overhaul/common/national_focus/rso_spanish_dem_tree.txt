@@ -1,0 +1,2691 @@
+### search_filters = {FOCUS_FILTER_POLITICAL}
+### search_filters = {FOCUS_FILTER_RESEARCH}
+### search_filters = {FOCUS_FILTER_INDUSTRY}
+### search_filters = {FOCUS_FILTER_STABILITY}
+### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+### search_filters = {FOCUS_FILTER_MANPOWER}
+### search_filters = {FOCUS_FILTER_ANNEXATION}
+
+focus_tree = {
+	id = SPR_scw_spanish_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = SPR
+			has_dlc = "La Resistance"
+			has_country_flag = civil_war_aborted
+		}
+	}
+	
+	continuous_focus_position = { x = 50 y = 1700 }
+	
+##############################################################################################################################
+## COMMON FOCUSES --- BEGINNING
+##############################################################################################################################
+
+	#Focus for Estabilizar el gobierno
+	focus = {
+		id = SPR_estabilizarelgobierno
+		icon = GFX_focus_spr_maintain_the_republic
+		x = 19
+		y = 0
+		cost = 5
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_STABILITY}
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 120
+			every_state = {
+				limit = {
+					is_core_of = SPA
+				}
+				add_core_of = SPR
+				remove_core_of = SPA
+			}
+			add_timed_idea = {
+				idea = SPR_unstable_society
+				days = 547
+			}
+		}
+	}
+
+	#Focus for Desactivar a los carlistas
+	focus = {
+		id = SPR_desactivaraloscarlistas
+		icon = GFX_focus_spa_no_compromise_on_carlist_ideals
+		x = 15
+		y = 1
+		cost = 2
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_estabilizarelgobierno }
+		search_filters = { FOCUS_FILTER_STABILITY } 
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_stability = 0.10
+			remove_ideas = SPA_carlism_1
+			#If manuel Fal Conde has not been killed
+			hidden_effect = {
+				if = { 
+					limit = { 
+						NOT = { has_country_flag = SPR_fal_conde_killed } 
+					} 
+					retire_ideology_leader = neutrality
+					add_popularity = {
+						ideology = neutrality
+						popularity = -0.15
+					}
+				}
+			}
+			set_party_name= { 
+				ideology = neutrality
+				long_name = SPR_centrist_name 
+				name = SPR_centrist 
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05 
+			}
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05 
+			}
+		}
+		
+	}
+
+	#Focus for Revelar a los cómplices cedistas
+	focus = {
+		id = SPR_revelaraloscmplicescedistas
+		icon = GFX_focus_renounce_the_treaty_of_trianon
+		x = 17
+		y = 1
+		cost = 1
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_estabilizarelgobierno }
+		search_filters = { FOCUS_FILTER_POLITICAL } 
+		ai_will_do = {
+			factor = 1
+		}
+		available = {
+			has_completed_focus = SPR_desactivaraloscarlistas
+		}
+		completion_reward = {
+			add_popularity = { 
+				ideology = fascism 
+				popularity = -0.05 
+			}
+			add_popularity= { 
+				ideology = democratic
+				popularity = 0.1 
+			}
+		}
+	}
+
+	#Focus for Ilegalizar la Falange
+	focus = {
+		id = SPR_ilegalizarlafalange
+		icon = GFX_goal_continuous_suppression
+		x = 19
+		y = 1
+		cost = 1
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = SPR_estabilizarelgobierno 
+		}
+		available = {
+			has_completed_focus = SPR_revelaraloscmplicescedistas
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL } 
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			set_party_name= { 
+				ideology = fascism
+				long_name = SPR_ceda_2 
+				name = SPR_ceda_2 
+			}
+			add_political_power= 100
+			retire_ideology_leader = fascism
+			add_popularity = { 
+				ideology = communism
+				popularity = 0.05
+			}
+			hidden_effect = {
+				remove_ideas = { SPA_jose_antonio_primo_de_rivera }
+			}
+		}
+	}
+	
+	#Focus for La cuestión anarquista
+	focus = {
+		id = SPR_lacuestinanarquista
+		icon = GFX_focus_spr_torchbearers_of_tomorrow
+		x = 21
+		y = 1
+		cost = 3
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_estabilizarelgobierno }
+		search_filters = { FOCUS_FILTER_STABILITY } 
+		ai_will_do = {
+			factor = 100
+		}
+		available = {
+			has_completed_focus = SPR_ilegalizarlafalange
+		}
+		completion_reward = {
+			add_popularity= { 
+				ideology = democratic
+				popularity = 0.05 
+			}
+			add_stability= 0.10
+		}
+	}
+	
+	#Focus for Acuerdos Sindicales
+	focus = {
+		id = SPR_acuerdossindicales
+		icon = GFX_goal_generic_improve_relations
+		x = 23
+		y = 1
+		cost = 3
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_estabilizarelgobierno }
+		search_filters = { FOCUS_FILTER_POLITICAL } 
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			SPR_clr_national_strikes = yes
+			add_stability = -0.05
+			add_popularity = { 
+				ideology = communism
+				popularity = 0.05
+			}
+		}
+	}
+	
+##########################################
+## COMMON FOCUSES --- DEMOCRATIC
+##########################################	
+
+	#Focus for Socialdemocracia
+	focus = {
+		id = SPR_socialdemocracia
+		icon = GFX_goal_anti_comintern_pact
+		x = 17
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_desactivaraloscarlistas }
+		prerequisite = { focus = SPR_ilegalizarlafalange }
+		prerequisite = { focus = SPR_lacuestinanarquista }
+		prerequisite = { focus = SPR_acuerdossindicales }
+		prerequisite = { focus = SPR_revelaraloscmplicescedistas }
+		mutually_exclusive = { focus = SPR_seguirlarevolucin }
+		search_filters = { FOCUS_FILTER_POLITICAL } 
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			add_stability= -0.10
+			set_party_name= { 
+				ideology = communism 
+				long_name = SPR_poum 
+				name = SPR_poum 
+			}
+			add_political_power = 50
+		}
+	}
+	
+	#Focus for La ARS
+	focus = {
+		id = SPR_laars
+		icon = GFX_goal_support_democracy
+		x = 18
+		y = 3
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = SPR_socialdemocracia 
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL } 
+		mutually_exclusive = { focus = SPR_launinrepublicana }
+		ai_will_do = {
+			factor = 70
+		}
+		completion_reward = {
+			set_country_flag = SPR_a_new_dawn
+			set_country_flag = SPR_a_the_ars
+			set_cosmetic_tag = SPR_republican_old
+			set_party_name= { 
+				ideology = democratic 
+				long_name = SPR_ars_name 
+				name = SPR_ars
+			}
+			retire_ideology_leader = communism
+			create_country_leader = {
+				name = "Julián Gorkin"
+				desc = "POLITICS_JULIAN_GORKIN_DESC"
+				picture = "GFX_portrait_SPR_julian_gorkin"
+				expire = "1965.1.1"
+				ideology = marxism
+				traits = {
+					militant_socialist
+				}
+			}
+			add_popularity = { 
+				ideology = democratic
+				popularity = 0.15
+			}
+			add_popularity = { 
+				ideology = communism
+				popularity = 0.05
+			}
+			add_stability = -0.075
+		}
+	}
+
+	#Focus for La Unión Republicana
+	focus = {
+		id = SPR_launinrepublicana
+		icon = GFX_goal_generic_improve_relations
+		x = 16
+		y = 3
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_socialdemocracia }
+		search_filters = { FOCUS_FILTER_POLITICAL } 
+		mutually_exclusive = { focus = SPR_laars }
+		ai_will_do = {
+			factor = 30
+		}
+		
+		completion_reward = {
+			set_country_flag = SPR_a_new_dawn
+			set_country_flag = SPR_a_the_ur
+			set_cosmetic_tag = SPR_republican_old
+			set_party_name= { 
+				ideology = democratic 
+				long_name = SPR_ur_name
+				name = SPR_ur
+			}
+			add_popularity = { 
+				ideology = democratic
+				popularity = 0.25
+			}
+			add_popularity = { 
+				ideology = communism
+				popularity = 0.25
+			}
+			add_stability = -0.15
+		}	
+	}	
+	
+##########################################
+## COMMON FOCUSES --- COMMUNIST
+##########################################	
+
+##############################################################################################################################
+	 ####  ####   ####          ####   #####  #   #
+	#      #   #  #   #         #	#  #	  ## ##
+	 ###   ####   ####    ###   #	#  ####   # # #
+	    #  #      #  #          # 	#  #	  #   #
+	####   #      #   #         ####   #####  #   #
+##############################################################################################################################
+
+
+##############################################################################################################################
+## MILITAR FOCUSES - COMPLETED
+##############################################################################################################################
+
+	#Focus for La Reforma Militar
+	focus = {
+		id = SPR_lareformamilitar
+		icon = GFX_focus_generic_manpower
+		x = 3
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		available = {
+			has_country_flag = SPR_a_new_dawn
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			remove_ideas = { idea = SPR_disbanded_army_1 }
+			add_ideas = { SPR_SCW_professional_military }
+			army_experience = 25
+			add_stability = 0.025
+			hidden_effect = {
+				country_lock_all_division_template = no
+			}
+		}
+	}
+
+	#Focus for Leales entre Traidores
+	focus = {
+		id = SPR_lealesentretraidores
+		icon = GFX_focus_generic_military_mission
+		x = 0
+		y = 5
+		cost = 5
+		available_if_capitulated = yes
+		available = {
+			NOT = { 
+				has_idea = SPR_SCW_africanists_shot
+			}
+		}
+		prerequisite = { 
+			focus = SPR_lareformamilitar 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			#lanzar evento
+			if = {
+				limit = {
+					has_idea = SPR_SCW_africanists_arrested_a
+				}
+				remove_ideas = SPR_SCW_africanists_arrested_a
+				add_timed_idea = {
+					idea = SPR_SCW_amnesty_again
+					days = 365
+				}
+				create_corps_commander = {
+					name = "Francisco Franco"
+					gfx = "GFX_portrait_spain_francisco_franco"
+					traits = { organisational_leader logistics_wizard expert_delegator }
+					skill = 3
+					attack_skill = 3
+					defense_skill = 2
+					planning_skill = 2
+					logistics_skill = 3
+				}
+				create_corps_commander = {
+					name = "Miguel Cabanellas"
+					gfx = "GFX_portrait_SPA_miguel_cabanellas"
+					traits = { cavalry_officer old_guard }
+					female = yes
+					skill = 3
+					attack_skill = 2
+					defense_skill = 2
+					planning_skill = 3
+					logistics_skill = 3
+				}
+			} else if {
+				limit = {
+					has_idea = SPR_SCW_africanists_arrested_b
+				}
+				remove_ideas = SPR_SCW_africanists_arrested_b
+				hidden_effect = {
+					add_ideas = { SPA_jose_antonio_giron_2 }
+				}
+				add_timed_idea = {
+					idea = SPR_SCW_amnesty_again
+					days = 365
+				}
+				create_corps_commander = {
+					name = "Francisco Franco"
+					gfx = "GFX_portrait_spain_francisco_franco"
+					traits = { organisational_leader logistics_wizard expert_delegator trait_SPR_republican_loyalties }
+					skill = 3
+					attack_skill = 3
+					defense_skill = 2
+					planning_skill = 2
+					logistics_skill = 3
+				}
+				create_corps_commander = {
+					name = "Miguel Cabanellas"
+					gfx = "GFX_portrait_SPA_miguel_cabanellas"
+					traits = { cavalry_officer old_guard trait_SPR_republican_loyalties }
+					female = yes
+					skill = 3
+					attack_skill = 2
+					defense_skill = 2
+					planning_skill = 3
+					logistics_skill = 3
+				}
+			} else {}
+		}
+	}
+	
+	#Focus for Ampliar las indutrias militares
+	focus = {
+		id = SPR_ampliarlasindutriasmilitares
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 0
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_elarmaacorazada }
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			178 = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			290 = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	#Focus for Innovaciones tácticas I
+	focus = {
+		id = SPR_innovacionestcticasi
+		icon = GFX_goal_generic_air_doctrine
+		x = 2
+		y = 5
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_lareformamilitar }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 1
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+	
+	#Focus for El Arma Aérea
+	focus = {
+		id = SPR_elarmaarea
+		icon = GFX_goal_generic_air_fighter2
+		x = 2
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_innovacionestcticasi }
+		ai_will_do = {
+			factor = 1
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 1.0
+				uses = 2
+				category = air_doctrine
+			}
+			air_experience = 25
+		}
+	}
+
+	#Focus for Nuevos aparatos
+	focus = {
+		id = SPR_nuevosaparatos
+		icon = GFX_goal_generic_air_bomber
+		x = 2
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_elarmaarea }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = SPA_a_modern_fighter_fleet
+				bonus = 1.0
+				uses = 1
+				category = light_fighter
+				category = cat_heavy_fighter
+			}
+			add_tech_bonus = {
+				name = SPA_a_modern_fighter_fleet
+				bonus = 1
+				uses = 1
+				category = cas_bomber
+				category = tactical_bomber		
+			}
+		}
+	}
+	
+	#Focus for El Arma Acorazada
+	focus = {
+		id = SPR_elarmaacorazada
+		icon = GFX_goal_generic_army_tanks
+		x = 0
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_innovacionestcticasi }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 1.0
+				uses = 2
+				category = armor
+			}
+		}
+	}
+
+	#Focus for Ampliar las indutrias militares
+	focus = {
+		id = SPR_ampliarlasindutriasmilitares
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 0
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_elarmaacorazada }
+		ai_will_do = {
+			factor = 100
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			178 = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			290 = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	#Focus for Modernizar el equipamiento
+	focus = {
+		id = SPR_modernizarelequipamiento
+		icon = GFX_goal_generic_small_arms
+		x = 4
+		y = 5
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_lareformamilitar }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 0.5
+				uses = 1
+				category = artillery
+			}		
+		}
+	}
+	
+	#Focus for Motorizar el ejército
+	focus = {
+		id = SPR_motorizarelejrcito
+		icon = GFX_goal_generic_army_motorized
+		x = 4
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_modernizarelequipamiento }
+		ai_will_do = {
+			factor = 1
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 2.0
+				uses = 1
+				category = motorized_equipment
+			}
+		}
+	}
+	
+	#Focus for Invertir en la Armada
+	focus = {
+		id = SPR_invertirenlaarmada
+		icon = GFX_goal_generic_navy_battleship
+		x = 6
+		y = 5
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_lareformamilitar }
+		ai_will_do = {
+			factor = 1
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			navy_experience = 25
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 1
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+	}
+	
+	#Focus for Modernizar los buques ligeros
+	focus = {
+		id = SPR_modernizarlosbuquesligeros
+		icon = GFX_focus_generic_destroyer
+		x = 5
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_invertirenlaarmada }
+		ai_will_do = {
+			factor = 1
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 1
+				uses = 2
+				category = dd_tech
+			}
+		}
+	}
+	
+	#Focus for Modernizar los Cruceros
+	focus = {
+		id = SPR_modernizarloscruceros
+		icon = GFX_focus_generic_cruiser2
+		x = 7
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_invertirenlaarmada }
+		ai_will_do = {
+			factor = 1
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 1
+				uses = 2
+				category = cl_tech
+				category = ca_tech
+			}
+		}
+	}
+
+	#Focus for Nuevos buques capitales
+	focus = {
+		id = SPR_nuevosbuquescapitales
+		icon = GFX_focus_generic_navy_battleship2
+		x = 6
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = SPR_modernizarloscruceros 
+		}
+		prerequisite = { 
+			focus = SPR_modernizarlosbuquesligeros 
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 1
+				uses = 2
+				category = bb_tech
+				category = cv_tech
+			}
+		}
+	}
+	
+##############################################################################################################################
+## POLITICAL FOCUSES I - COMPLETED
+##############################################################################################################################
+
+	#Focus for Un nuevo amanecer
+	focus = {
+		id = SPR_unnuevoamanecer
+		icon = GFX_focus_spr_war_of_independence
+		x = 6
+		y = 0
+		cost = 5
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_POLITICAL } 
+		search_filters = { FOCUS_FILTER_STABILITY } 
+		ai_will_do = {
+			factor = 1
+		}
+		available = {
+			has_country_flag = SPR_a_new_dawn
+		}
+		completion_reward = {
+			add_stability = 0.05
+			remove_ideas = SPR_political_violence
+			###custom_effect_tooltip = remove_political_advisor
+			###show_ideas_tooltip = SPR_juan_negrin
+		}
+	}
+
+##############################################################################################################################
+## POLITICAL FOCUSES I - LEFT SIDE COMPLETED
+##############################################################################################################################
+	
+	#Focus for Instituto de Reforma Social
+	focus = {
+		id = SPR_institutodereformasocial
+		icon = GFX_goal_generic_improve_relations
+		x = 1
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_unnuevoamanecer }
+		search_filters = { FOCUS_FILTER_POLITICAL } 
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_ideas = SPR_SCW_social_reforms_1
+		}
+	}	
+
+	#LEFT
+	
+	#Focus for Ley de Seguridad Social
+	focus = {
+		id = SPR_leydeseguridadsocial
+		icon = GFX_goal_generic_consumer_goods
+		x = 0
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_institutodereformasocial }
+		search_filters = { FOCUS_FILTER_STABILITY } 
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = SPR_leydeviviendasestatales
+				}
+				remove_ideas = SPR_SCW_social_reforms_2
+				add_ideas = SPR_SCW_social_reforms_3
+			}
+			else = {
+				remove_ideas = SPR_SCW_social_reforms_1
+				add_ideas = SPR_SCW_social_reforms_2
+			}
+		}
+	}
+	
+	#Focus for Reformar la Ley del Trabajo
+	focus = {
+		id = SPR_reformarlaleydeltrabajo
+		icon = GFX_goal_generic_construction2
+		x = 0
+		y = 3
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_leydeseguridadsocial }
+		search_filters = { FOCUS_FILTER_STABILITY } 
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_ideas = SPR_SCW_labour_law_1
+		}
+	}
+
+	#RIGHT	
+	
+	#Focus for Mejorar la Sanidad
+	focus = {
+		id = SPR_mejorarlasanidad
+		icon = GFX_goal_tripartite_pact
+		x = 2
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_institutodereformasocial }
+		search_filters = { FOCUS_FILTER_STABILITY } 
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			conscription = 0.05
+			add_stability = 0.05
+		}
+	}
+	
+	#Focus for Ley de Viviendas Estatales
+	focus = {
+		id = SPR_leydeviviendasestatales
+		icon = GFX_goal_generic_neutrality_focus
+		x = 2
+		y = 3
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_mejorarlasanidad }
+		search_filters = { FOCUS_FILTER_STABILITY } 
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { has_completed_focus = SPR_leydeseguridadsocial }
+				}
+				remove_ideas = SPR_SCW_social_reforms_1
+				add_ideas = SPR_SCW_social_reforms_2
+			}
+			else = {
+				remove_ideas = SPR_SCW_social_reforms_2
+				add_ideas = SPR_SCW_social_reforms_3
+			}
+		}
+	}
+	
+##############################################################################################################################
+## POLITICAL FOCUSES I - CENTER SIDE COMPLETED
+##############################################################################################################################
+	
+	#Focus for La Reforma Agraria
+	focus = {
+		id = SPR_lareformaagraria
+		icon = GFX_goal_generic_construct_civilian
+		x = 6
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_unnuevoamanecer }
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_political_power = 120
+		}
+	}
+
+	#RIGHT	
+		
+	#Focus for Carreteras Nacionales
+	focus = {
+		id = SPR_carreterasnacionales
+		icon = GFX_goal_generic_construct_infrastructure
+		x = 7
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_lareformaagraria }
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			788 = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			170 = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#Focus for Renovar la Industria
+	focus = {
+		id = SPR_renovarlaindustria
+		icon = GFX_focus_generic_industry_3
+		x = 8
+		y = 3
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_carreterasnacionales }
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			41 = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#Focus for Apoyos Sindicales
+	focus = {
+		id = SPR_apoyossindicales
+		icon = GFX_focus_generic_treaty
+		x = 8
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_renovarlaindustria }
+		available = {
+			has_idea = SPR_SCW_labour_law_1
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			remove_ideas = SPR_SCW_labour_law_1
+			add_ideas = SPR_SCW_labour_law_2
+		}
+	}
+	
+	#Focus for Equilibrar las infraestructuras nacionales
+	focus = {
+		id = SPR_equilibrarlasinfraestructurasnacionales
+		icon = GFX_goal_generic_construct_infrastructure
+		x = 12
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_renovarlaindustria }
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward {
+			178 = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			699 = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			290 = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#LEFT	
+		
+	#Focus for Purgar el Analfabetismo
+	focus = {
+		id = SPR_purgarelanalfabetismo
+		icon = GFX_goal_generic_scientific_exchange
+		x = 5
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_lareformaagraria }
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	#Focus for Un estado laico
+	focus = {
+		id = SPR_unestadolaico
+		icon = GFX_focus_generic_treaty
+		x = 4
+		y = 3
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_purgarelanalfabetismo }
+		search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+		mutually_exclusive = { focus = SPR_unestadoaconfesional }
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			add_ideas = SPR_SCW_full_secularism
+		}
+	}
+	
+	#Focus for Un estado aconfesional
+	focus = {
+		id = SPR_unestadoaconfesional
+		icon = GFX_goal_generic_neutrality_focus
+		x = 6
+		y = 3
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_purgarelanalfabetismo }
+		search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+		mutually_exclusive = { focus = SPR_unestadolaico }
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			add_ideas = SPR_SCW_middle_secularism
+		}
+	}
+	
+	#Focus for Subvencionar el consumo
+	focus = {
+		id = SPR_subvencionarelconsumo
+		icon = GFX_goal_generic_consumer_goods
+		x = 9
+		y = 5
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_apoyossindicales }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			remove_ideas = SPR_SCW_labour_law_2
+			add_ideas = SPR_SCW_labour_law_3
+		}
+	}
+	
+	#Focus for Recuperación económica
+	focus = {
+		id = SPR_recuperacineconmica
+		icon = GFX_focus_spa_the_spanish_miracle
+		x = 9
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		available {
+			OR = {
+				has_completed_focus = SPR_adoptarelfederalismo
+				has_completed_focus = SPR_estatutosdeautonoma
+			}
+			has_idea = SPR_SCW_labour_law_3
+			has_idea = SPR_SCW_social_reforms_3
+			date > 1939.4.1
+		}
+		prerequisite = { 
+			focus = SPR_subvencionarelconsumo 
+		}
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward {
+			remove_ideas = SPR_SCW_labour_law_3
+			remove_ideas = SPR_SCW_social_reforms_3
+			add_ideas = SPR_SCW_economic_recovery
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+##############################################################################################################################
+## POLITICAL FOCUSES I - RIGHT SIDE COMPLETED
+##############################################################################################################################
+	
+	#Focus for Integrar los nacionalismos
+	focus = {
+		id = SPR_integrarlosnacionalismos
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 11
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_unnuevoamanecer }
+		search_filters = { FOCUS_FILTER_POLITICAL } 
+		search_filters = { FOCUS_FILTER_STABILITY } 
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	
+	#Focus for Acuerdo con el PNV
+	focus = {
+		id = SPR_acuerdoconelpnv
+		icon = GFX_goal_generic_improve_relations
+		x = 9
+		y = 2
+		cost = 3
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_integrarlosnacionalismos }
+		search_filters = { FOCUS_FILTER_STABILITY } 
+		completion_reward = {
+			172 = {
+				remove_core_of = NAV
+			}
+			792 = {
+				remove_core_of = NAV
+			}
+			add_stability = 0.01
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	#Focus for El Estatut Catalá
+	focus = {
+		id = SPR_elestatutcatal
+		icon = GFX_goal_generic_major_alliance
+		x = 11
+		y = 2
+		cost = 3
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_integrarlosnacionalismos }
+		search_filters = { FOCUS_FILTER_STABILITY } 
+		completion_reward {
+			165 = {
+				remove_core_of = CAT
+			}
+			add_stability = 0.01
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for Apoyar a las regiones históricas
+	focus = {
+		id = SPR_apoyaralasregioneshistricas
+		icon = GFX_goal_molotov_ribbentrop_pact
+		x = 13
+		y = 2
+		cost = 4
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_integrarlosnacionalismos }
+		search_filters = { FOCUS_FILTER_STABILITY } 
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			171 = {
+				remove_core_of = GLC
+			}
+			add_stability = 0.01
+		}
+	}
+
+	#Focus for Estatutos de Autonomía
+	focus = {
+		id = SPR_estatutosdeautonoma
+		icon = GFX_goal_support_democracy
+		x = 10
+		y = 3
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = SPR_elestatutcatal 
+		}
+		prerequisite = { 
+			focus = SPR_acuerdoconelpnv 
+		}
+		prerequisite = { 
+			focus = SPR_apoyaralasregioneshistricas 
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL } 
+		mutually_exclusive = { focus = SPR_adoptarelfederalismo }
+		completion_reward = {
+			add_ideas = SPR_SCW_autonomous_communities
+			set_party_name = {
+				ideology = neutrality
+				long_name = SPR_auto_party_2_long
+				name = SPR_auto_party_2
+			}
+			add_popularity = { 
+				ideology = neutrality
+				popularity = 0.25
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for Adoptar el federalismo
+	focus = {
+		id = SPR_adoptarelfederalismo
+		icon = GFX_focus_intervention_spain_republic
+		x = 12
+		y = 3
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = SPR_acuerdoconelpnv 
+		}
+		prerequisite = { 
+			focus = SPR_elestatutcatal 
+		}
+		prerequisite = { 
+			focus = SPR_apoyaralasregioneshistricas 
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL } 
+		mutually_exclusive = { focus = SPR_estatutosdeautonoma }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward {
+			set_cosmetic_tag = SPR_federal
+			add_ideas = SPR_SCW_federalism
+			set_party_name = {
+				ideology = neutrality
+				long_name = SPR_auto_party_1_long
+				name = SPR_auto_party_1
+			}
+			add_popularity = { 
+				ideology = neutrality
+				popularity = 0.45
+			}
+		}
+		hidden_effect = {
+			172 = {
+				add_core_of = NAV
+			}
+			792 = {
+				add_core_of = NAV
+			}
+			171 = {
+				add_core_of = GLC
+			} 
+			165 = {
+				add_core_of = CAT
+			}
+		}
+	}
+
+		
+##############################################################################################################################
+## POLITICAL FOCUSES II - COMPLETED
+##############################################################################################################################
+
+	#Focus for Unirse a los Aliados
+	focus = {
+		id = SPR_unirsealosaliados
+		icon = GFX_goal_support_democracy
+		x = 9
+		y = 9
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = SPR_prietismo 
+			focus = SPR_caballerismo 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			ENG = { country_event = { id = SCW_england.1 hours = 6} }
+		}
+	}
+	
+	#Focus for Equipamiento Francés
+	focus = {
+		id = SPR_equipamientofrancs
+		icon = GFX_focus_chi_reach_out_to_france
+		x = 8
+		y = 10
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_unirsealosaliados }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+		}
+	}
+	
+	#Focus for Negociar la Roca
+	focus = {
+		id = SPR_negociarlaroca
+		icon = GFX_focus_chi_british_cooperation
+		x = 10
+		y = 10
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_unirsealosaliados }
+		ai_will_do = {
+			factor = 1
+		}
+		bypass = {
+			owns_state = 118
+		}
+		completion_reward {
+			ENG = { country_event = { id = SCW_england.2 hours = 6} }
+		}
+	}
+
+	#Focus for El Radar
+	focus = {
+		id = SPR_elradar
+		icon = GFX_goal_generic_radar
+		x = 9
+		y = 11
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = SPR_equipamientofrancs 
+		}
+		prerequisite = { 
+			focus = SPR_negociarlaroca 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 1
+				uses = 2
+				category = radar_tech
+			}
+		}
+	}
+
+##############################################################################################################################
+## CABALLERISM
+##############################################################################################################################
+	
+	#Focus for Caballerismo
+	focus = {
+		id = SPR_caballerismo
+		icon = GFX_goal_generic_national_unity
+		x = 6
+		y = 8
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_recuperacineconmica }
+		mutually_exclusive = { focus = SPR_prietismo }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_ideas = SPR_SCW_caballerism
+		}
+	}
+
+	#CENTER
+	
+	#Focus for Refrendar nuestra neutralidad
+	focus = {
+		id = SPR_refrendarnuestraneutralidad
+		icon = GFX_goal_generic_improve_relations
+		x = 6
+		y = 9
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_caballerismo }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for Esfuerzo en Exportación
+	focus = {
+		id = SPR_esfuerzoenexportacin
+		icon = GFX_goal_generic_construction2
+		x = 6
+		y = 10
+		cost = 10
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = SPR_refrendarnuestraneutralidad }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for La despensa de Europa
+	focus = {
+		id = SPR_ladespensadeeuropa
+		icon = GFX_goal_generic_consumer_goods
+		x = 7
+		y = 11
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = SPR_esfuerzoenexportacin 
+		}
+		prerequisite = { 
+			focus = SPR_equipamientofrancs 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}	
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}				
+		}
+	}
+	
+	#LEFT
+
+	#Focus for Intervención Preventiva
+	focus = {
+		id = SPR_intervencinpreventiva
+		icon = GFX_focus_generic_attack_portugal
+		x = 1
+		y = 9
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_caballerismo }
+		mutually_exclusive = { focus = SPR_influiraportugal }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			effect_tooltip = {
+				create_wargoal = {
+					type = annex_everything
+					target = POR
+				}
+			}
+			add_state_core = 181
+			add_state_core = 112
+			add_state_core = 795
+			add_state_core = 179
+			add_state_core = 698
+			add_state_core = 697
+			add_state_core = 702
+			add_state_core = 296
+		}
+	}
+
+	#Focus for Eliminar el Salazarismo
+	focus = {
+		id = SPR_eliminarelsalazarismo
+		icon = GFX_focus_por_salazar
+		x = 0
+		y = 10
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_intervencinpreventiva }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	#Focus for Absorber el Ejército Portugués
+	focus = {
+		id = SPR_absorberelejrcitoportugus
+		icon = GFX_focus_generic_military_mission
+		x = 0
+		y = 11
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_eliminarelsalazarismo }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for Influir a Portugal
+	focus = {
+		id = SPR_influiraportugal
+		icon = GFX_focus_generic_befriend_portugal
+		x = 3
+		y = 9
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_caballerismo }
+		mutually_exclusive = { focus = SPR_intervencinpreventiva }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			POR = {
+				add_timed_idea = { 
+					idea = POR_SCW_spanish_influence
+					days = 365
+				}
+			}
+		}
+	}
+
+	#Focus for La Unión Republicana Ibérica
+	focus = {
+		id = SPR_launinrepublicanaibrica
+		icon = GFX_focus_generic_self_management
+		x = 4
+		y = 10
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_influiraportugal }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	#Focus for Fusionar los Institutos Tecnológicos
+	focus = {
+		id = SPR_fusionarlosinstitutostecnolgicos
+		icon = GFX_goal_tfv_generic_tech_sharing
+		x = 4
+		y = 11
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_launinrepublicanaibrica }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}	
+
+	#COMMON 
+
+	#Focus for Una península unida
+	focus = {
+		id = SPR_unapennsulaunida
+		icon = GFX_focus_intervention_spain_republic
+		x = 2
+		y = 10
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = SPR_influiraportugal 
+			focus = SPR_intervencinpreventiva 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		available = {
+			if = {
+				limit = { 
+					has_completed_focus = SPR_intervencinpreventiva 
+				}	
+				has_war = no
+				owns_state = 179
+				controls_state = 179
+				owns_state = 795
+				controls_state = 795
+				owns_state = 112
+				controls_state = 112
+				owns_state = 181
+				controls_state = 181
+			} 
+			if = {
+				limit = { 
+					has_completed_focus = SPR_influiraportugal 
+				}	
+				POR = {
+					NOT = { 
+						has_war_with = SPR
+						has_war = yes
+						has_idea = POR_SCW_spanish_influence 
+					}
+				}
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = { has_completed_focus = SPR_influiraportugal }
+				add_stability = 0.10
+				add_political_power = 120
+				POR = { country_event = { id = SCW_portugal.1 hours = 6} }
+			}
+			if = {
+				limit = { has_completed_focus = SPR_intervencinpreventiva }
+				add_stability = 0.10
+				add_political_power = 120
+				add_ideas = SPR_SCW_a_united_peninsula
+				if = {
+					limit = { 
+						has_completed_focus = SPR_adoptarelfederalismo
+					}
+					set_cosmetic_tag = SPR_SCW_iberia_federal
+				} else {
+					set_cosmetic_tag = SPR_SCW_iberia_centralist
+				}
+			}
+		}
+	}
+	
+	#Focus for Integrar la industria portuguesa
+	focus = {
+		id = SPR_integrarlaindustriaportuguesa
+		icon = GFX_goal_generic_construct_civ_factory
+		x = 2
+		y = 11
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_unapennsulaunida }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+##############################################################################################################################
+## NEGRINISM
+##############################################################################################################################	
+	
+	#Focus for Prietismo
+	focus = {
+		id = SPR_prietismo
+		icon = GFX_goal_generic_demand_territory
+		x = 12
+		y = 8
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_recuperacineconmica }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		mutually_exclusive = { 
+			focus = SPR_caballerismo 
+		}
+		mutually_exclusive = { 
+			focus = SPR_unirsealosaliados 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward {
+			add_war_support = 0.05
+			add_ideas = SPR_SCW_negrinism
+		}
+	}
+	
+	# CENTER
+
+	#Focus for Asegurar la Reserva Nacional
+	focus = {
+		id = SPR_asegurarlareservanacional
+		icon = GFX_focus_usa_reestablish_the_gold_standard
+		x = 12
+		y = 9
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_prietismo }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_ideas = SPR_SCW_secure_reserve			
+		}
+	}
+
+	#Focus for Inversiones Extranjeras I
+	focus = {
+		id = SPR_inversionesextranjerasi
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 12
+		y = 10
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_asegurarlareservanacional }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 0.5
+				uses = 2
+				category = excavation_tech
+			}
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 0.5
+				uses = 2
+				category = synth_resources
+			}			
+		}
+	}
+
+	#Focus for Inversiones Extranjeras II
+	focus = {
+		id = SPR_inversionesextranjerasii
+		icon = GFX_goal_generic_oil_refinery
+		x = 11
+		y = 11
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = SPR_inversionesextranjerasi 
+		}
+		prerequisite = { 
+			focus = SPR_negociarlaroca 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	# RIGHT
+
+	#Focus for Estratagemas defensivas
+	focus = {
+		id = SPR_estratagemasdefensivas
+		icon = GFX_goal_generic_defence
+		x = 15
+		y = 9
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_prietismo }
+		mutually_exclusive = { focus = SPR_guerrademaniobras }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward {
+			add_ideas = SPR_SCW_defensive_stratagems
+			army_experience = 25
+		}
+	}
+
+	#Focus for Fortificar los pirineros
+	focus = {
+		id = SPR_fortificarlospirineros
+		icon = GFX_goal_generic_construct_military
+		x = 14
+		y = 10
+		cost = 10
+		available_if_capitulated = yes
+		available = {
+			has_full_control_of_state = 792
+			has_full_control_of_state = 172
+			has_full_control_of_state = 166
+			has_full_control_of_state = 794
+			has_full_control_of_state = 165
+		}
+		prerequisite = { focus = SPR_estratagemasdefensivas }
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			792 = {
+				add_building_construction = {
+					type = bunker
+					province = {
+						id = 6756
+					}
+					level = 2
+					instant_build = yes
+				}
+			}
+			165 = {
+				add_building_construction = {
+					type = bunker
+					province = {
+						id = 3899
+						id = 11779
+						id = 9824
+					}
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#Focus for Fortificar los archipiélagos
+	focus = {
+		id = SPR_fortificarlosarchipilagos
+		icon = GFX_goal_generic_fortify_city
+		x = 14
+		y = 11
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_fortificarlospirineros }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			177 = {
+				add_building_construction = {
+					type = bunker
+					province = {
+						id = 9793
+					}
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					province = {
+						id = 9793
+					}
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = {
+						id = 9845
+						id = 7114
+					}
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					province = {
+						id = 9845
+						id = 7114
+					}
+					level = 1
+					instant_build = yes
+				}
+			}
+			178 = {
+				add_building_construction = {
+					type = bunker
+					province = {
+						id = 13071
+					}
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					province = {
+						id = 9793
+					}
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#Focus for Guerra de Maniobras
+	focus = {
+		id = SPR_guerrademaniobras
+		icon = GFX_goal_continuous_armor_production
+		x = 17
+		y = 9
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_prietismo }
+		mutually_exclusive = { focus = SPR_estratagemasdefensivas }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward {
+			add_ideas = SPR_SCW_mobile_war
+			army_experience = 25
+		}
+	}
+
+	#Focus for Innovaciones tácticas II
+	focus = {
+		id = SPR_innovacionestcticasii
+		icon = GFX_goal_generic_cavalry
+		x = 18
+		y = 10
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_guerrademaniobras }
+		ai_will_do = {
+			factor = 1
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SPR_engineering_advances
+				bonus = 1
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	#Focus for Préstamo y Arriendo
+	focus = {
+		id = SPR_prstamoyarriendo
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 18
+		y = 11
+		cost = 10
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = SPR_innovacionestcticasii }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	#COMMON 
+	
+	#Focus for Ampliar las infraestructuras
+	focus = {
+		id = SPR_ampliarlasinfraestructuras
+		icon = GFX_goal_generic_construct_civ_factory
+		x = 16
+		y = 10
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = SPR_estratagemasdefensivas 
+			focus = SPR_guerrademaniobras 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward {
+			792 = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			794 = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			166 = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			165 = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#Focus for Intercambios tecnológicos
+	focus = {
+		id = SPR_intercambiostecnolgicos
+		icon = GFX_focus_research2
+		x = 16
+		y = 11
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_ampliarlasinfraestructuras }
+		ai_will_do = {
+			factor = 1
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+##############################################################################################################################
+## COMMON INDUSTRIAL FOCUSES - INCOMPLETE
+##############################################################################################################################
+
+	#Focus for Nacionalizar las industrias clave
+	focus = {
+		id = SPR_nacionalizarlasindustriasclave
+		icon = GFX_goal_generic_construct_civilian
+		x = 19
+		y = 4
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { 
+			#focus = SPR_renovarlaindustria 
+			#focus = SPR_colectivizacinnacional 
+		}
+		available = {
+			OR = {
+				has_country_flag = SPR_a_new_dawn
+				#has_country_flag = SPR_communism
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_political_power = 50
+			set_country_flag = SPR_telefonica
+			set_country_flag = SPR_campsa
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	# LEFT
+
+	#Focus for Ampliar los puertos
+	focus = {
+		id = SPR_ampliarlospuertos
+		icon = GFX_goal_generic_construct_naval_dockyard
+		x = 13
+		y = 5
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_nacionalizarlasindustriasclave }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	#Focus for La Guardia Naval
+	focus = {
+		id = SPR_laguardianaval
+		icon = GFX_goal_generic_amphibious_assault
+		x = 11
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_ampliarlospuertos }
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	#Focus for Ampliar los astillleros de Cádiz
+	focus = {
+		id = SPR_ampliarlosastilllerosdecdiz
+		icon = GFX_goal_generic_construct_naval_dockyard
+		x = 13
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_ampliarlospuertos }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	#Focus for Mejorar El Ferrol
+	focus = {
+		id = SPR_mejorarelferrol
+		icon = GFX_goal_generic_build_navy
+		x = 13
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_ampliarlosastilllerosdecdiz }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	#Focus for Infreastructuras Portuarias
+	focus = {
+		id = SPR_infreastructurasportuarias
+		icon = GFX_goal_unknown ##Unfortunately, the tool could not find your icon in the game's files
+		x = 15
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_ampliarlospuertos }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	# CENTER
+	
+	#Focus for Fábrica Nacional de Armas
+	focus = {
+		id = SPR_fbricanacionaldearmas
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 19
+		y = 5
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_nacionalizarlasindustriasclave }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			789 = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			170 = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	#Focus for STAR
+	focus = {
+		id = SPR_star
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 17
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_fbricanacionaldearmas }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			793 = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#Focus for Unceta y Cía
+	focus = {
+		id = SPR_uncetayca
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 17
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_star }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			792 = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#Focus for Infraestructura Militar
+	focus = {
+		id = SPR_infraestructuramilitar
+		icon = GFX_goal_generic_construct_infrastructure
+		x = 19
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_fbricanacionaldearmas }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		mutually_exclusive = { focus = SPR_lamiliciapopular }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	#Focus for Las dos Guardias
+	focus = {
+		id = SPR_lasdosguardias
+		icon = GFX_goal_generic_axis_build_infantry
+		x = 19
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_infraestructuramilitar }
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for La Milicia Popular
+	focus = {
+		id = SPR_lamiliciapopular
+		icon = GFX_goal_continuous_reduce_training_time
+		x = 21
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_fbricanacionaldearmas }
+		mutually_exclusive = { focus = SPR_infraestructuramilitar }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for La GNR
+	focus = {
+		id = SPR_lagnr
+		icon = GFX_goal_generic_allies_build_infantry
+		x = 21
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_lamiliciapopular }
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#RIGHT
+	
+	#Focus for Ampliar la industria civil
+	focus = {
+		id = SPR_ampliarlaindustriacivil
+		icon = GFX_goal_generic_construct_civ_factory
+		x = 25
+		y = 5
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_nacionalizarlasindustriasclave }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			793 = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			791 = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			788 = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	#Focus for Mejorar la industria textil
+	focus = {
+		id = SPR_mejorarlaindustriatextil
+		icon = GFX_goal_generic_consumer_goods
+		x = 23
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_ampliarlaindustriacivil }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	#Focus for Invertir en la Aviación
+	focus = {
+		id = SPR_invertirenlaaviacin
+		icon = GFX_goal_generic_construct_civilian
+		x = 25
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_ampliarlaindustriacivil }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for CASA
+	focus = {
+		id = SPR_casa
+		icon = GFX_goal_generic_air_fighter2
+		x = 25
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_invertirenlaaviacin }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for Mejorar la Industria Siderúrgica
+	focus = {
+		id = SPR_mejorarlaindustriasiderrgica
+		icon = GFX_goal_generic_construct_infrastructure
+		x = 27
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_ampliarlaindustriacivil }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			790 = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	#Focus for Hornos y fundiciones de Bilbao
+	focus = {
+		id = SPR_hornosyfundicionesdebilbao
+		icon = GFX_goal_generic_construction2
+		x = 27
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SPR_mejorarlaindustriasiderrgica }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			792 = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#End of focuses 
+ }

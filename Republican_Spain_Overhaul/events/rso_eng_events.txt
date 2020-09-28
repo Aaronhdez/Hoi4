@@ -1,0 +1,86 @@
+﻿add_namespace = SCW_england
+
+#Spain wants to join Allies
+
+country_event = {
+	id = SCW_england.1
+	title = SCW_england.1.t
+	desc = SCW_england.1.d
+	picture = GFX_news_event_generic_read_write
+
+	is_triggered_only = yes
+	
+	option = { #YES
+		name = SCW_england.1.a
+		add_to_faction = FROM
+		FROM = {
+			add_ai_strategy = {
+				type = alliance
+				id = "ENG"
+				value = 200
+			}
+		}
+		FROM = { country_event = { id = SCW_spain.1 } } #NICE
+		hidden_effect = {
+			news_event = { id = SCW_public_news.1 }
+		}
+	}
+	
+	option = { #NO
+		name = SCW_england.1.b
+		ai_chance = { factor = 0 }
+		FROM = { 
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = small_decrease
+			}
+			country_event = { id = SCW_spain.2 } #FOOLS
+		}
+	}
+}
+
+#England surrenders Gibraltar
+country_event = {
+	id = SCW_england.2
+	title = SCW_england.2.t
+	desc = SCW_england.2.d
+	picture = GFX_report_event_generic_sign_treaty3
+	
+	is_triggered_only = yes
+	
+	option = { # Accept demands
+		name = SCW_england.2.a
+		ai_chance = {
+			factor = 90
+			modifier = { # Don't accept if SPR not in faction
+				factor = 0
+				NOT = { is_in_faction_with = SPR }				
+			}
+			modifier = {										#England will still refuse on historical
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		SPR = {
+			country_event = { days = 1 id = SCW_spain.3 }
+		}
+	}
+	option = { # Refuse
+		name = SCW_england.2.b
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SPR }	
+			}
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 100
+			}
+		}
+		SPR = {
+			country_event = { days = 1 id = SCW_spain.4 }
+		}
+	}
+}

@@ -1,0 +1,29 @@
+add_namespace = SCW_public_news
+
+#SPAIN JOINS ALLIES
+news_event = {
+	id = SCW_public_news.1
+	title = SCW_public_news.1.t
+	desc = SCW_public_news.1.d
+	picture = GFX_news_event_019
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = SCW_public_news.1.a
+	}
+}
+
+#GIBRALTAR IS TRANSFERED
+news_event = {
+	id = SCW_public_news.2
+	title = SCW_public_news.2.t
+	desc = SCW_public_news.2.d
+	picture = GFX_news_event_052
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = SCW_public_news.2.a
+	}
+}

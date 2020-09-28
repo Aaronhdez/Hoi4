@@ -1,0 +1,43 @@
+add_namespace = SCW_news
+
+#SPAIN JOINS ALLIES
+country_event = {
+	id = SCW_news.1
+	title = SCW_news.1.t
+	desc = SCW_news.1.d
+	picture = news_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = SCW_news.1.a
+	}
+}
+
+#SPAIN DOES NOT JOIN ALLIES
+country_event = {
+	id = SCW_news.2
+	title = SCW_news.2.t
+	desc = SCW_news.2.d
+	picture = news_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = SCW_news.2.a
+	}
+}
+
+#GIBRALTAR IS TRANSFERED
+country_event = {
+	id = SCW_news.3
+	title = SCW_news.3.t
+	desc = SCW_news.3.d
+	picture = news_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	option = {
+		
+	}
+}

@@ -1,0 +1,578 @@
+﻿add_namespace = SPR_SCW_tree_event
+
+##Event: Rumores de conspiración
+country_event = {
+	id = SPR_SCW_tree_event.1
+	title = SPR_SCW_tree_event.1.title
+	desc = SPR_SCW_tree_event.1.desc
+	picture = GFX_report_event_soviet_purge_officers_02
+
+	fire_only_once = yes	
+	
+	trigger = {
+		has_dlc = "La Resistance"
+		tag = SPR
+		has_active_mission = SPR_military_plot_republicans	
+	}
+	mean_time_to_happen = {
+		days = 10									# Activate once Elections have been passed over
+	}
+	option = {
+		name = SPR_SCW_tree_event.1.a
+		hidden_effect = {
+			add_ideas = { idea = SPR_SCW_investigate_coup }
+		}
+		add_political_power = -15
+		ai_chance = { factor = 20}
+	}
+	option = {
+		name = SPR_SCW_tree_event.1.b
+		ai_chance = { factor = 80}
+		add_stability = 0.1
+		add_political_power = 15
+	}
+}
+
+##Event: Informe del Servicio de Inteligencia
+country_event = {
+	id = SPR_SCW_tree_event.2
+	title = SPR_SCW_tree_event.2.title
+	desc = SPR_SCW_tree_event.2.desc
+	picture = GFX_report_event_saf_soldiers_2
+
+	fire_only_once = yes	
+	
+	trigger = {
+		has_dlc = "La Resistance"
+		tag = SPR
+		has_idea = SPR_SCW_investigate_coup
+		date > 1936.3.25
+	}
+	mean_time_to_happen = {
+		days = 15									# Activate once SPA has reached the second focus.
+	}
+	option = {
+		name = SPR_SCW_tree_event.2.a
+		ai_chance = { factor = 15}
+		hidden_effect = {
+			set_country_flag = SPR_SCW_inv_1
+			add_days_mission_timeout = {
+				mission = SPR_military_plot_republicans
+				days = 15
+			}
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.1
+		}	
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.1
+		}				
+		add_stability = -0.05
+		add_political_power = -25
+	}
+	
+	option = {
+		name = SPR_SCW_tree_event.2.b
+		ai_chance = { factor = 15}
+		hidden_effect = {
+			add_days_mission_timeout = {
+				mission = SPR_military_plot_republicans
+				days = 20
+			}
+			set_country_flag = SPR_SCW_inv_2
+		}		
+		add_stability = -0.05
+		add_political_power = -15
+	}
+	
+	option = {
+		name = SPR_SCW_tree_event.2.c
+		ai_chance = { factor = 70}
+		hidden_effect = {
+			remove_ideas = { idea = SPR_SCW_investigate_coup }
+			add_days_mission_timeout = {
+				mission = SPR_military_plot_republicans
+				days = 25
+			}	
+		}
+		add_stability = 0.1
+		add_political_power = 25
+	}
+}
+
+##Event: Posible implicación carlista
+country_event = {
+	id = SPR_SCW_tree_event.3
+	title = SPR_SCW_tree_event.3.title
+	desc = SPR_SCW_tree_event.3.desc
+	picture = GFX_report_event_por_salazar_franco2
+	
+	fire_only_once = yes	
+	
+	trigger = {
+		has_dlc = "La Resistance"
+		tag = SPR 
+		NOT = { has_global_flag = spanish_civil_war }
+		has_idea = SPR_SCW_investigate_coup
+		has_country_flag = SPR_SCW_inv_1
+		date > 1936.5.1
+	}
+
+	mean_time_to_happen = {
+		days = 15									# Activate once SPA has reached the second focus.
+	}
+	
+	option = {
+		name = SPR_SCW_tree_event.3.a
+		ai_chance = { factor = 20}
+		hidden_effect = {
+			add_days_mission_timeout = {
+				mission = SPR_military_plot_republicans
+				days = 25
+			}
+			set_country_flag = SPR_fal_conde_killed 
+		}
+		retire_ideology_leader = neutrality
+		add_popularity = {
+			ideology = neutrality
+			popularity = -0.15
+		}
+		add_stability = -0.05
+		add_political_power = -25	
+	}
+	
+	option = {
+		name = SPR_SCW_tree_event.3.b
+		ai_chance = { factor = 80}
+		hidden_effect = {
+			remove_ideas = { idea = SPR_SCW_investigate_coup }
+		}
+		add_stability = 0.1
+		add_political_power = 50
+	}
+}
+
+##Event: Posibles complices en la Marina y la Aviación
+country_event = {
+	id = SPR_SCW_tree_event.4
+	title = SPR_SCW_tree_event.4.title
+	desc = SPR_SCW_tree_event.4.desc
+	picture = GFX_report_event_por_salazar_franco2
+	
+	fire_only_once = yes	
+	
+	trigger = {
+		has_dlc = "La Resistance"
+		tag = SPR 
+		NOT = { has_global_flag = spanish_civil_war }
+		has_idea = SPR_SCW_investigate_coup
+		has_country_flag = SPR_SCW_inv_2
+		date > 1936.5.1
+	}
+
+	mean_time_to_happen = {
+		days = 15									
+	}
+	
+	option = {	#Purge and keep Investigating
+		name = SPR_SCW_tree_event.4.a
+		ai_chance = { factor = 20}
+		hidden_effect = {
+			add_days_mission_timeout = {
+				mission = SPR_military_plot_republicans
+				days = 25
+			}
+			remove_ideas = SPR_joaquin_garcia_morato
+			remove_ideas = SPR_juan_vigon_suero_diaz
+			remove_ideas = SPR_luis_carrero_blanco
+			
+		}
+		add_political_power = -25
+	}
+	
+	option = {
+		name = SPR_SCW_tree_event.4.b
+		ai_chance = { factor = 80}		
+		hidden_effect = {
+			clr_country_flag = SPR_SCW_inv_2
+			remove_ideas = { idea = SPR_SCW_investigate_coup }
+		}
+		SPR = {country_event = SPR_SCW_tree_event.failed days = 15}
+		add_stability = 0.1
+		add_political_power = 50
+	}
+}
+
+
+##Event: Sanjurjo está implicado
+country_event = {
+	id = SPR_SCW_tree_event.5
+	title = SPR_SCW_tree_event.5.title
+	desc = SPR_SCW_tree_event.5.desc
+	picture = GFX_report_event_por_salazar_franco1
+	
+	fire_only_once = yes	
+	
+	trigger = {
+		has_dlc = "La Resistance"
+		tag = SPR
+		NOT = { has_global_flag = spanish_civil_war }
+		has_idea = SPR_SCW_investigate_coup
+		has_country_flag = SPR_SCW_inv_1
+		date > 1936.6.1
+	}
+
+	mean_time_to_happen = {
+		days = 15									
+	}
+	
+	option = { #Kill him
+		name = SPR_SCW_tree_event.5.a
+		ai_chance = { factor = 50}
+		hidden_effect = {
+			add_days_mission_timeout = {
+				mission = SPR_military_plot_republicans
+				days = 10
+			}
+			clr_country_flag = SPR_SCW_inv_1
+			set_country_flag = SPR_SCW_inv_2
+		}
+		add_popularity = {
+			ideology = democratic
+			popularity = -0.15
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.1
+		}	
+		add_stability = -0.15
+		add_political_power = -25	
+	}
+	
+	option = { #Let him live, for the moment
+		name = SPR_SCW_tree_event.5.b
+		ai_chance = { factor = 50}
+		hidden_effect = {
+			add_days_mission_timeout = {
+				mission = SPR_military_plot_republicans
+				days = -25
+			}
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+		add_stability = 0.1
+		add_political_power = 25
+	}
+}
+
+##Event: Sospechosos entre los 'Africanistas'
+country_event = {
+	id = SPR_SCW_tree_event.6
+	title = SPR_SCW_tree_event.6.title
+	desc = SPR_SCW_tree_event.6.desc
+	picture = GFX_report_event_por_salazar_franco1
+	
+	fire_only_once = yes	
+	
+	trigger = {
+		has_dlc = "La Resistance"
+		tag = SPR
+		NOT = { has_global_flag = spanish_civil_war }
+		has_idea = SPR_SCW_investigate_coup
+		has_country_flag = SPR_SCW_inv_2
+		date > 1936.6.1
+	}
+
+	mean_time_to_happen = {
+		days = 15									# Activate once SPA has reached the second focus.
+	}
+	
+	option = { #Juan Yagüe
+		name = SPR_SCW_tree_event.6.a
+		ai_chance = { factor = 50}
+		hidden_effect = { 
+			SPR = {country_event = SPR_SCW_tree_event.failed days = 15}
+		}
+		add_stability = 0.1
+	}
+	
+	option = { #Cabanellas
+		name = SPR_SCW_tree_event.6.b
+		ai_chance = { factor = 50}
+		hidden_effect = {
+			add_days_mission_timeout = {
+				mission = SPR_military_plot_republicans
+				days = 25
+			}
+			SPR = {country_event = SPR_SCW_tree_event.8 days = 20}
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+		add_stability = -0.025
+		add_political_power = -25
+	}
+}
+
+##Event: ¡Conspiradores descubiertos!
+country_event = {
+	id = SPR_SCW_tree_event.7
+	title = SPR_SCW_tree_event.7.title
+	desc = SPR_SCW_tree_event.7.desc
+	picture = GFX_report_event_spr_franco_generals
+
+	fire_only_once = yes	
+	
+	trigger = {
+		NOT = { has_global_flag = spanish_civil_war }
+		has_dlc = "La Resistance"
+		tag = SPR
+		has_idea = SPR_SCW_investigate_coup
+		has_country_flag = SPR_SCW_inv_1
+		date > 1936.7.1
+	}
+
+	mean_time_to_happen = {
+		days = 15									# Activate once SPA has reached the second focus.
+	}
+	
+	option = {
+		name = SPR_SCW_tree_event.7.a
+		ai_chance = { factor = 70}
+		add_ideas = { ideas = SPR_SCW_africanists_arrested_a }	
+		remove_ideas = { idea = SPR_SCW_investigate_coup }
+		remove_ideas = { idea = SPR_military_disloyalty }
+		add_ideas = { idea = SPR_disbanded_army_1 }
+		remove_unit_leader = 1108
+		remove_unit_leader = 1109
+		remove_unit_leader = 1110
+		remove_unit_leader = 1111
+		remove_unit_leader = 1112
+		remove_unit_leader = 1113
+		remove_unit_leader = 1114
+		remove_unit_leader = 1115
+		remove_unit_leader = 1116
+		remove_unit_leader = 1118
+		hidden_effect = {
+			load_focus_tree = {
+				tree = SPR_scw_spanish_tree
+				keep_completed = no
+			}
+			SPR = {
+				delete_units = {
+				    division_template = "División de Infantería"
+				    disband = yes
+				}
+				delete_units = {
+				    division_template = "División de Caballería"
+				    disband = yes
+				}
+				delete_units = {
+				    division_template = "Brigada Montaña"
+				    disband = yes
+				}
+			}
+			every_unit_leader = {
+				add_unit_leader_trait = trait_SPA_falangist_loyalties
+			}
+			add_ideas = SPR_disbanded_army_1
+			clr_country_flag = SPR_spanish_elections_flag
+			set_country_flag = civil_war_aborted
+			clr_country_flag = spanish_civil_war
+			set_global_flag = scw_over
+			clr_country_flag = SPR_SCW_inv_1
+		}
+	}
+	option = {
+		name = SPR_SCW_tree_event.7.b
+		ai_chance = { factor = 15}
+		add_ideas = { ideas = SPR_SCW_africanists_arrested_b }
+		remove_ideas = { idea = SPR_SCW_investigate_coup }
+		remove_ideas = { idea = SPR_military_disloyalty }
+		add_ideas = { idea = SPR_disbanded_army_1 }
+		remove_unit_leader = 1108
+		remove_unit_leader = 1109
+		remove_unit_leader = 1110
+		remove_unit_leader = 1111
+		remove_unit_leader = 1112
+		remove_unit_leader = 1113
+		remove_unit_leader = 1114
+		remove_unit_leader = 1115
+		remove_unit_leader = 1116
+		remove_unit_leader = 1118
+		hidden_effect = {
+			load_focus_tree = {
+				tree = SPR_scw_spanish_tree
+				keep_completed = no
+			}
+			SPR = {
+				delete_units = {
+				    division_template = "División de Infantería"
+				    disband = yes
+				}
+				delete_units = {
+				    division_template = "División de Caballería"
+				    disband = yes
+				}
+				delete_units = {
+				    division_template = "Brigada Montaña"
+				    disband = yes
+				}
+			}	
+			every_unit_leader = {
+				add_unit_leader_trait = trait_SPA_falangist_loyalties
+			}		
+			clr_country_flag = SPR_spanish_elections_flag
+			set_country_flag = civil_war_aborted
+			clr_country_flag = spanish_civil_war
+			set_global_flag = scw_over
+			clr_country_flag = SPR_SCW_inv_1
+		}
+	}
+	option = {
+		name = SPR_SCW_tree_event.7.c
+		ai_chance = { factor = 15}
+		add_ideas = { ideas = SPR_SCW_africanists_shot }
+		remove_ideas = { idea = SPR_SCW_investigate_coup }
+		remove_ideas = { idea = SPR_military_disloyalty }
+		add_ideas = { idea = SPR_disbanded_army_1 }
+		remove_unit_leader = 1108
+		remove_unit_leader = 1109
+		remove_unit_leader = 1110
+		remove_unit_leader = 1111
+		remove_unit_leader = 1112
+		remove_unit_leader = 1113
+		remove_unit_leader = 1114
+		remove_unit_leader = 1115
+		remove_unit_leader = 1116
+		remove_unit_leader = 1118
+		hidden_effect = {
+			load_focus_tree = {
+				tree = SPR_scw_spanish_tree
+				keep_completed = no
+			}
+			SPR = {
+				delete_units = {
+				    division_template = "División de Infantería"
+				    disband = yes
+				}
+				delete_units = {
+				    division_template = "División de Caballería"
+				    disband = yes
+				}
+				delete_units = {
+				    division_template = "Brigada Montaña"
+				    disband = yes
+				}
+				
+			}
+			every_unit_leader = {
+				add_unit_leader_trait = trait_SPA_falangist_loyalties
+			}
+			clr_country_flag = SPR_spanish_elections_flag
+			set_country_flag = civil_war_aborted
+			clr_country_flag = spanish_civil_war
+			set_global_flag = scw_over
+			clr_country_flag = SPR_SCW_inv_1
+		}
+	}
+}
+
+##Event: ¡Conspiradores descubiertos!
+country_event = {
+	id = SPR_SCW_tree_event.8
+	title = SPR_SCW_tree_event.8.title
+	desc = SPR_SCW_tree_event.8.desc
+	picture = GFX_report_event_spr_franco_generals
+
+	fire_only_once = yes	
+	
+	trigger = {
+		NOT = { has_global_flag = spanish_civil_war }
+		has_dlc = "La Resistance"
+		tag = SPR
+		has_idea = SPR_SCW_investigate_coup
+		has_country_flag = SPR_SCW_inv_2
+		date > 1936.7.1
+	}
+
+	mean_time_to_happen = {
+		days = 15									# Activate once SPA has reached the second focus.
+	}
+	
+	option = {
+		name = SPR_SCW_tree_event.8.a
+		ai_chance = { factor = 15}
+		add_ideas = { ideas = SPR_SCW_africanists_arrested_b }
+		remove_ideas = { idea = SPR_SCW_investigate_coup }
+		remove_ideas = { idea = SPR_military_disloyalty }
+		add_ideas = { idea = SPR_disbanded_army_1 }
+		remove_unit_leader = 1108
+		remove_unit_leader = 1109
+		remove_unit_leader = 1110
+		remove_unit_leader = 1111
+		remove_unit_leader = 1112
+		remove_unit_leader = 1113
+		remove_unit_leader = 1114
+		remove_unit_leader = 1115
+		remove_unit_leader = 1116
+		remove_unit_leader = 1118
+		hidden_effect = {
+			load_focus_tree = {
+				tree = SPR_scw_spanish_tree
+				keep_completed = no
+			}
+			SPR = {
+				delete_units = {
+				    division_template = "División de Infantería"
+				    disband = yes
+				}
+				delete_units = {
+				    division_template = "División de Caballería"
+				    disband = yes
+				}
+				delete_units = {
+				    division_template = "Brigada Montaña"
+				    disband = yes
+				}
+			}
+			every_unit_leader = {
+				add_unit_leader_trait = trait_SPA_falangist_loyalties
+			}
+			clr_country_flag = SPR_spanish_elections_flag
+			set_country_flag = civil_war_aborted
+			clr_country_flag = spanish_civil_war
+			set_global_flag = scw_over
+			clr_country_flag = SPR_SCW_inv_2
+		}
+	}
+}
+
+##Event: Failed investigation 
+country_event = {
+	id = SPR_SCW_tree_event.failed
+	title = SPR_SCW_tree_event.failed.title
+	desc = SPR_SCW_tree_event.failed.desc
+	picture = GFX_report_event_spr_franco_generals
+
+	fire_only_once = yes	
+	is_triggered_only = yes	
+	
+	option = { #Shame
+		name = SPR_SCW_tree_event.failed.a
+		ai_chance = { factor = 50}
+		hidden_effect = { 
+			add_days_mission_timeout = {
+				mission = SPR_military_plot_republicans
+				days = 20
+			}
+		}
+		add_stability = 0.1
+	}
+	
+}
